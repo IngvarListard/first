@@ -1,1 +1,1 @@
-worker: python HogeBot.py
+web: python HogeBot.py
