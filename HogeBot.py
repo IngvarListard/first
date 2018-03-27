@@ -9,7 +9,7 @@ from flask import Flask, request
 
 server = Flask(__name__)
 token = '486658164:AAEKCXMICg9R1njGG_hCSLAsGyNl0rC_p-c'
-bot = telebot.TeleBot(token) # Обращение к боту + токен
+bot = telebot.TeleBot(token, threaded=False) # Обращение к боту + токен
 types = telebot.types # Types for markup
 ee_db = json.load(open(config.eedb_file)) # Открытие БД
 pe_db = json.load(open(config.pedb_file))
