@@ -1,9 +1,13 @@
 # -*- coding: utf-8 -*-
+import os
 import config
 import telebot
 import json
 from natsort import natsorted
+from flask import Flask, request
 
+
+server = Flask(__name__)
 token = '486658164:AAEKCXMICg9R1njGG_hCSLAsGyNl0rC_p-c'
 bot = telebot.TeleBot(token) # Обращение к боту + токен
 types = telebot.types # Types for markup
@@ -20,6 +24,19 @@ command = [['pe0' + str(x) for x in range(1, 10)],['pe' + str(x) for x in range(
 pe_command_list = []
 for i in command: pe_command_list.extend(i) # объединение списков команд
 command_list.extend(pe_command_list)
+
+
+@server.route('/' + token, methods=['POST'])
+def getMessage():
+    bot.process_new_updates([telebot.types.Update.de_json(request.stream.read().decode("utf-8"))])
+    return "!", 200
+
+
+@server.route("/")
+def webhook():
+    bot.remove_webhook()
+    bot.set_webhook(url='https://frozen-earth-59517.herokuapp.com/' + token)
+    return "!", 200
 
 
 def smes(message, text): # Облегчаем жизнь отправки сообщений
@@ -180,5 +197,6 @@ def response_catcher(message):
 
 
 
-if __name__ == '__main__':
-     bot.polling(none_stop=True)
+
+if __name__ == "__main__":
+    server.run(host="0.0.0.0", port=int(os.environ.get('PORT', 5000)))
