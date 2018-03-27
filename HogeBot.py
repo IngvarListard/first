@@ -36,7 +36,7 @@ def getMessage():
 @server.route("/")
 def webhook():
     bot.remove_webhook()
-    bot.set_webhook(url='https://frozen-earth-59517.herokuapp.com/' + token)
+    bot.set_webhook(url='https://safe-refuge-18942.herokuapp.com/' + token)
     return "!", 200
 
 
