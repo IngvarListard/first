@@ -28,6 +28,7 @@ command_list.extend(pe_command_list)
 
 @server.route('/' + token, methods=['POST'])
 def getMessage():
+    print('GOT IT!')
     bot.process_new_messages([telebot.types.Update.de_json(request.stream.read().decode("utf-8"))])
     return "!", 200
 
