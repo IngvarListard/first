@@ -3,7 +3,6 @@ chardet==3.0.4
 idna==2.6
 natsort==5.2.0
 pyTelegramBotAPI==3.6.2
-six==1.11.0
 urllib3==1.22
 py==1.4.29
 pytest==3.0.2
